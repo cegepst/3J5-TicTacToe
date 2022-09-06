@@ -4,7 +4,7 @@ import java.util.Scanner;
 public class App {
     public static void afficherTableau(int[][] intArray) {
 
-        System.out.print("\n");
+        Terminal.lineBreak();
 
         for (int j = 0; j < 3; ++j) {
             for (int i = 0; i < 3; ++i) {
