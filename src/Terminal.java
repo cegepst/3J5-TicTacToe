@@ -9,7 +9,7 @@ public class Terminal {
 
     public static int readInt(String message) {
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Enter a number");
+        System.out.print(message);
         return scanner.nextInt();
     }
 }
