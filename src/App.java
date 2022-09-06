@@ -1,5 +1,4 @@
 import java.util.Random;
-import java.util.Scanner;
 
 public class App {
     public static void afficherTableau(int[][] intArray) {
@@ -40,14 +39,11 @@ public class App {
     }
 
     public static void tourJoueur (int[][] intArray) {
-
-        Scanner lecteur = new Scanner(System.in);
         boolean valide;
         int caseX;
 
         do {
-            System.out.printf("Sélectionnez une case (1-9): ");
-            caseX = lecteur.nextInt();
+            caseX = Terminal.readInt("Sélectionnez une case (1-9): ");
 
             if (caseX < 1 || caseX > 9) {
                 valide = false;
