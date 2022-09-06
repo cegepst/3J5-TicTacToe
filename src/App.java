@@ -94,10 +94,7 @@ public class App {
     }
 
     public static boolean verifierSiPlein (int[][] intArray)  {
-
-        boolean plein = false;
         int compteur = 0;
-
         for (int j = 0; j < 3; ++j) {
             for (int i = 0; i < 3; ++i) {
                 if (intArray[j][i] != 0 && intArray[j][i] != -1) {
@@ -105,10 +102,7 @@ public class App {
                 }
             }
         }
-        if (compteur <= 0) {
-            plein = true;
-        }
-        return plein;
+        return compteur <= 0;
     }
 
     public static boolean verifierSiGagner (int[][] intArray) {
