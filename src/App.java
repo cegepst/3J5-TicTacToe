@@ -1,7 +1,7 @@
 import java.util.Random;
 
 public class App {
-    public static void afficherTableau(int[][] gameGrid) {
+    public static void displayGrid(int[][] gameGrid) {
 
         Terminal.lineBreak();
 
@@ -25,36 +25,36 @@ public class App {
         }
     }
 
-    public static void initialiserMatrice (int[][] gameGrid) {
+    public static void initializeGrid(int[][] gameGrid) {
 
-        int k = 1;
+        int inputNumber = 1;
 
 
         for (int j = 0; j < 3; ++j) {
             for (int i = 0; i < 3; ++i) {
 
-                gameGrid[j][i] = k;
-                ++k;
+                gameGrid[j][i] = inputNumber;
+                ++inputNumber;
             }
         }
     }
 
-    public static void tourJoueur (int[][] gameGrid) {
-        boolean valide;
-        int caseX;
+    public static void playerTurn(int[][] gameGrid) {
+        boolean valid;
+        int cellCoordinate;
 
         do {
-            caseX = Terminal.readInt("Sélectionnez une case (1-9): ");
+            cellCoordinate = Terminal.readInt("Sélectionnez une case (1-9): ");
 
-            if (caseX < 1 || caseX > 9) {
-                valide = false;
+            if (cellCoordinate < 1 || cellCoordinate > 9) {
+                valid = false;
                 System.out.println("Valeur doit etre entre 1 et 9");
             } else {
-                valide = true;
+                valid = true;
             }
-        } while (!valide);
+        } while (!valid);
 
-        switch (caseX) {
+        switch (cellCoordinate) {
             case 1 : gameGrid[0][0] = 0;break;
             case 2 : gameGrid[0][1] = 0;break;
             case 3 : gameGrid[0][2] = 0;break;
@@ -67,117 +67,117 @@ public class App {
         }
     }
 
-    public static void tourIA (int[][] gameGrid) {
+    public static void computerTurn(int[][] gameGrid) {
 
         Random randomGenerator = new Random();
-        boolean valide;
-        int caseO1;
-        int caseO2;
+        boolean valid;
+        int xPosition;
+        int yPosition;
 
 
 
 
         do {
-            caseO1 = randomGenerator.nextInt(3);
-            caseO2 = randomGenerator.nextInt(3);
+            xPosition = randomGenerator.nextInt(3);
+            yPosition = randomGenerator.nextInt(3);
 
-            if (gameGrid[caseO1][caseO2] == 0 || gameGrid[caseO1][caseO2] == -1){
-                valide = false;
+            if (gameGrid[xPosition][yPosition] == 0 || gameGrid[xPosition][yPosition] == -1){
+                valid = false;
             } else {
-                gameGrid[caseO1][caseO2] = -1;
-                valide = true;
+                gameGrid[xPosition][yPosition] = -1;
+                valid = true;
             }
-        } while (!valide);
+        } while (!valid);
 
     }
 
-    public static boolean verifierSiPlein (int[][] gameGrid)  {
-        int compteur = 0;
+    public static boolean isFull(int[][] gameGrid)  {
+        int fullCellCount = 0;
         for (int j = 0; j < 3; ++j) {
             for (int i = 0; i < 3; ++i) {
                 if (gameGrid[j][i] != 0 && gameGrid[j][i] != -1) {
-                    ++compteur;
+                    ++fullCellCount;
                 }
             }
         }
-        return compteur <= 0;
+        return fullCellCount <= 0;
     }
 
-    public static boolean verifierSiGagner (int[][] gameGrid) {
+    public static boolean isPlayerWinner(int[][] gameGrid) {
 
-        boolean gagnant = false;
+        boolean won = false;
 
         if (gameGrid[0][0] == 0 && gameGrid[0][1] == 0 && gameGrid[0][2] == 0) {
-            gagnant = true;
+            won = true;
         } else if (gameGrid[1][0] == 0 && gameGrid[1][1] == 0 && gameGrid[1][2] == 0) {
-            gagnant = true;
+            won = true;
         } else if (gameGrid[2][0] == 0 && gameGrid[2][1] == 0 && gameGrid[2][2] == 0) {
-            gagnant = true;
+            won = true;
         } else if (gameGrid[0][0] == 0 && gameGrid[1][0] == 0 && gameGrid[2][0] == 0) {
-            gagnant = true;
+            won = true;
         } else if (gameGrid[0][1] == 0 && gameGrid[1][1] == 0 && gameGrid[2][1] == 0) {
-            gagnant = true;
+            won = true;
         } else if (gameGrid[0][2] == 0 && gameGrid[1][2] == 0 && gameGrid[2][2] == 0) {
-            gagnant = true;
+            won = true;
         } else if (gameGrid[0][0] == 0 && gameGrid[1][1] == 0 && gameGrid[2][2] == 0) {
-            gagnant = true;
+            won = true;
         } else if (gameGrid[0][2] == 0 && gameGrid[1][1] == 0 && gameGrid[2][0] == 0) {
-            gagnant = true;
+            won = true;
         }
 
-        return gagnant;
+        return won;
     }
 
-    public static boolean verifierSiIAGagner(int[][] gameGrid) {
+    public static boolean isComputerWinner(int[][] gameGrid) {
 
-        boolean IAGagnant = false;
+        boolean won = false;
 
         if (gameGrid[0][0] == -1 && gameGrid[0][1] == -1 && gameGrid[0][2] == -1) {
-            IAGagnant = true;
+            won = true;
         } else if (gameGrid[1][0] == -1 && gameGrid[1][1] == -1 && gameGrid[1][2] == -1) {
-            IAGagnant = true;
+            won = true;
         } else if (gameGrid[2][0] == -1 && gameGrid[2][1] == -1 && gameGrid[2][2] == -1) {
-            IAGagnant = true;
+            won = true;
         } else if (gameGrid[0][0] == -1 && gameGrid[1][0] == -1 && gameGrid[2][0] == -1) {
-            IAGagnant = true;
+            won = true;
         } else if (gameGrid[0][1] == -1 && gameGrid[1][1] == -1 && gameGrid[2][1] == -1) {
-            IAGagnant = true;
+            won = true;
         } else if (gameGrid[0][2] == -1 && gameGrid[1][2] == -1 && gameGrid[2][2] == -1) {
-            IAGagnant = true;
+            won = true;
         } else if (gameGrid[0][0] == -1 && gameGrid[1][1] == -1 && gameGrid[2][2] == -1) {
-            IAGagnant = true;
+            won = true;
         } else if (gameGrid[0][2] == -1 && gameGrid[1][1] == -1 && gameGrid[2][0] == -1) {
-            IAGagnant = true;
+            won = true;
         }
 
-        return IAGagnant;
+        return won;
     }
 
     public static void main(String[] args) {
 
-        boolean gagnant = false;
-        boolean IAGagnant = false;
-        boolean plein;
+        boolean playerWon = false;
+        boolean computerWon = false;
+        boolean isGridFilled;
         int[][] gameGrid = new int[3][3];
 
-        initialiserMatrice(gameGrid);
-        afficherTableau(gameGrid);
+        initializeGrid(gameGrid);
+        displayGrid(gameGrid);
         do {
-            tourJoueur(gameGrid);
-            gagnant = verifierSiGagner(gameGrid);
-            if (!gagnant) {
-                tourIA(gameGrid);
-                IAGagnant = verifierSiIAGagner(gameGrid);
+            playerTurn(gameGrid);
+            playerWon = isPlayerWinner(gameGrid);
+            if (!playerWon) {
+                computerTurn(gameGrid);
+                computerWon = isComputerWinner(gameGrid);
             }
-            afficherTableau(gameGrid);
-            plein = verifierSiPlein(gameGrid);
-        }  while (!gagnant && !plein && !IAGagnant);
+            displayGrid(gameGrid);
+            isGridFilled = isFull(gameGrid);
+        }  while (!playerWon && !isGridFilled && !computerWon);
 
-        if (gagnant) {
+        if (playerWon) {
             System.out.println("\nVous avez gagné.");
-        } else if (IAGagnant) {
+        } else if (computerWon) {
             System.out.println("\nL'IA a remporté la partie.");
-        } else if (plein) {
+        } else if (isGridFilled) {
             System.out.println("\nÉgalité.");
         }
 
