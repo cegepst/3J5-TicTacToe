@@ -11,11 +11,11 @@ public class App {
 
                 if (intArray[j][i] == 0 && i == 2) {
                     System.out.print(" X\n");
-                } else if (intArray[j][i] == 0 && i != 2) {
+                } else if (intArray[j][i] == 0) {
                     System.out.print(" X |");
                 } else if (intArray[j][i] == -1 && i == 2) {
                     System.out.print(" O\n");
-                } else if (intArray[j][i] == -1 && i != 2) {
+                } else if (intArray[j][i] == -1) {
                     System.out.print(" O |");
                 } else if (i == 2){
                     System.out.printf(" %d\n", intArray[j][i]);
