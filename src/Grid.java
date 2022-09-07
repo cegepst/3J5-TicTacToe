@@ -36,19 +36,9 @@ public class Grid {
 
     public void display() {
         Terminal.lineBreak();
-
         for (int j = 0; j < 3; ++j) {
             for (int i = 0; i < 3; ++i) {
-                if (gameGrid[j][i] == PLAYER) {
-                    Terminal.message(" X ");
-                } else if (gameGrid[j][i] == AI) {
-                    Terminal.message(" O ");
-                } else {
-                    Terminal.message(" "+ gameGrid[j][i] +" ");
-                }
-                if (i != 2) {
-                    Terminal.message("|");
-                }
+                displayCell(i, j);
             }
             Terminal.lineBreak();
         }
@@ -62,6 +52,19 @@ public class Grid {
                 gameGrid[j][i] = gridInitializer;
                 ++gridInitializer;
             }
+        }
+    }
+
+    private void displayCell(int i, int j) {
+        if (gameGrid[j][i] == PLAYER) {
+            Terminal.message(" X ");
+        } else if (gameGrid[j][i] == AI) {
+            Terminal.message(" O ");
+        } else {
+            Terminal.message(" "+ gameGrid[j][i] +" ");
+        }
+        if (i != 2) {
+            Terminal.message("|");
         }
     }
 }
