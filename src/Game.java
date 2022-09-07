@@ -13,13 +13,13 @@ public class Game {
 
     public void startGame() {
         do {
+            grid.display();
             playerTurn();
             playerWon = isTitleholder(Grid.PLAYER);
             if (!playerWon) {
                 computerTurn();
                 computerWon = isTitleholder(Grid.AI);
             }
-            grid.display();
             isGridFilled = grid.isFull();
         }  while (!playerWon && !isGridFilled && !computerWon);
         gameEnded();
