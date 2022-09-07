@@ -13,17 +13,17 @@ public class Game {
         for (int j = 0; j < 3; ++j) {
             for (int i = 0; i < 3; ++i) {
                 if (gameGrid[j][i] == 0 && i == 2) {
-                    System.out.print(" X\n");
+                    Terminal.message(" X\n");
                 } else if (gameGrid[j][i] == 0) {
-                    System.out.print(" X |");
+                    Terminal.message(" X |");
                 } else if (gameGrid[j][i] == -1 && i == 2) {
-                    System.out.print(" O\n");
+                    Terminal.message(" O\n");
                 } else if (gameGrid[j][i] == -1) {
-                    System.out.print(" O |");
+                    Terminal.message(" O |");
                 } else if (i == 2){
-                    System.out.printf(" %d\n", gameGrid[j][i]);
+                    Terminal.message(" "+ gameGrid[j][i] +"\n");
                 } else {
-                    System.out.printf(" %d |", gameGrid[j][i]);
+                    Terminal.message(" "+ gameGrid[j][i] +"|");
                 }
             }
         }
@@ -66,7 +66,7 @@ public class Game {
 
     private boolean isCoordinateValid(int cellCoordinate) {
         if (cellCoordinate < 1 || cellCoordinate > 9) {
-            System.out.println("Valeur doit etre entre 1 et 9");
+            Terminal.message("Valeur doit etre entre 1 et 9");
             return false;
         }
         return true;

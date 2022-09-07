@@ -20,11 +20,11 @@ public class App {
         }  while (!playerWon && !isGridFilled && !computerWon);
 
         if (playerWon) {
-            System.out.println("\nVous avez gagné.");
+            Terminal.message("\nVous avez gagné.\n");
         } else if (computerWon) {
-            System.out.println("\nL'IA a remporté la partie.");
+            Terminal.message("\nL'IA a remporté la partie.\n");
         } else if (isGridFilled) {
-            System.out.println("\nÉgalité.");
+            Terminal.message("\nÉgalité.\n");
         }
 
     }

@@ -12,4 +12,8 @@ public class Terminal {
         System.out.print(message);
         return scanner.nextInt();
     }
+
+    public static void message(String message) {
+        System.out.print(message);
+    }
 }
