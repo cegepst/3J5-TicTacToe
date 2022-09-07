@@ -104,54 +104,32 @@ public class App {
         return fullCellCount <= 0;
     }
 
-    public static boolean isPlayerWinner(int[][] gameGrid) {
-
-        boolean won = false;
-
-        if (gameGrid[0][0] == 0 && gameGrid[0][1] == 0 && gameGrid[0][2] == 0) {
-            won = true;
-        } else if (gameGrid[1][0] == 0 && gameGrid[1][1] == 0 && gameGrid[1][2] == 0) {
-            won = true;
-        } else if (gameGrid[2][0] == 0 && gameGrid[2][1] == 0 && gameGrid[2][2] == 0) {
-            won = true;
-        } else if (gameGrid[0][0] == 0 && gameGrid[1][0] == 0 && gameGrid[2][0] == 0) {
-            won = true;
-        } else if (gameGrid[0][1] == 0 && gameGrid[1][1] == 0 && gameGrid[2][1] == 0) {
-            won = true;
-        } else if (gameGrid[0][2] == 0 && gameGrid[1][2] == 0 && gameGrid[2][2] == 0) {
-            won = true;
-        } else if (gameGrid[0][0] == 0 && gameGrid[1][1] == 0 && gameGrid[2][2] == 0) {
-            won = true;
-        } else if (gameGrid[0][2] == 0 && gameGrid[1][1] == 0 && gameGrid[2][0] == 0) {
-            won = true;
+    public static boolean isWinner(int[][] gameGrid, int value) {
+        if (gameGrid[0][0] == value && gameGrid[0][1] == value && gameGrid[0][2] == value) {
+            return true;
         }
-
-        return won;
-    }
-
-    public static boolean isComputerWinner(int[][] gameGrid) {
-
-        boolean won = false;
-
-        if (gameGrid[0][0] == -1 && gameGrid[0][1] == -1 && gameGrid[0][2] == -1) {
-            won = true;
-        } else if (gameGrid[1][0] == -1 && gameGrid[1][1] == -1 && gameGrid[1][2] == -1) {
-            won = true;
-        } else if (gameGrid[2][0] == -1 && gameGrid[2][1] == -1 && gameGrid[2][2] == -1) {
-            won = true;
-        } else if (gameGrid[0][0] == -1 && gameGrid[1][0] == -1 && gameGrid[2][0] == -1) {
-            won = true;
-        } else if (gameGrid[0][1] == -1 && gameGrid[1][1] == -1 && gameGrid[2][1] == -1) {
-            won = true;
-        } else if (gameGrid[0][2] == -1 && gameGrid[1][2] == -1 && gameGrid[2][2] == -1) {
-            won = true;
-        } else if (gameGrid[0][0] == -1 && gameGrid[1][1] == -1 && gameGrid[2][2] == -1) {
-            won = true;
-        } else if (gameGrid[0][2] == -1 && gameGrid[1][1] == -1 && gameGrid[2][0] == -1) {
-            won = true;
+        if (gameGrid[1][0] == value && gameGrid[1][1] == value && gameGrid[1][2] == value) {
+            return true;
         }
-
-        return won;
+        if (gameGrid[2][0] == value && gameGrid[2][1] == value && gameGrid[2][2] == value) {
+            return true;
+        }
+        if (gameGrid[0][0] == value && gameGrid[1][0] == value && gameGrid[2][0] == value) {
+            return true;
+        }
+        if (gameGrid[0][1] == value && gameGrid[1][1] == value && gameGrid[2][1] == value) {
+            return true;
+        }
+        if (gameGrid[0][2] == value && gameGrid[1][2] == value && gameGrid[2][2] == value) {
+            return true;
+        }
+        if (gameGrid[0][0] == value && gameGrid[1][1] == value && gameGrid[2][2] == value) {
+            return true;
+        }
+        if (gameGrid[0][2] == value && gameGrid[1][1] == value && gameGrid[2][0] == value) {
+            return true;
+        }
+        return false;
     }
 
     public static void main(String[] args) {
@@ -165,10 +143,10 @@ public class App {
         displayGrid(gameGrid);
         do {
             playerTurn(gameGrid);
-            playerWon = isPlayerWinner(gameGrid);
+            playerWon = isWinner(gameGrid, 0);
             if (!playerWon) {
                 computerTurn(gameGrid);
-                computerWon = isComputerWinner(gameGrid);
+                computerWon = isWinner(gameGrid, -1);
             }
             displayGrid(gameGrid);
             isGridFilled = isFull(gameGrid);
