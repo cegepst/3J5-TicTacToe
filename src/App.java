@@ -76,8 +76,6 @@ public class App {
         int yPosition;
 
 
-
-
         do {
             xPosition = randomGenerator.nextInt(3);
             yPosition = randomGenerator.nextInt(3);
@@ -105,29 +103,31 @@ public class App {
     }
 
     public static boolean isWinner(int[][] gameGrid, int value) {
-        if (gameGrid[0][0] == value && gameGrid[0][1] == value && gameGrid[0][2] == value) {
-            return true;
-        }
-        if (gameGrid[1][0] == value && gameGrid[1][1] == value && gameGrid[1][2] == value) {
-            return true;
-        }
-        if (gameGrid[2][0] == value && gameGrid[2][1] == value && gameGrid[2][2] == value) {
-            return true;
-        }
-        if (gameGrid[0][0] == value && gameGrid[1][0] == value && gameGrid[2][0] == value) {
-            return true;
-        }
-        if (gameGrid[0][1] == value && gameGrid[1][1] == value && gameGrid[2][1] == value) {
-            return true;
-        }
-        if (gameGrid[0][2] == value && gameGrid[1][2] == value && gameGrid[2][2] == value) {
-            return true;
-        }
-        if (gameGrid[0][0] == value && gameGrid[1][1] == value && gameGrid[2][2] == value) {
-            return true;
-        }
-        if (gameGrid[0][2] == value && gameGrid[1][1] == value && gameGrid[2][0] == value) {
-            return true;
+        int rowPoints = 0;
+        int columnPoints = 0;
+        int downwardDiagonal = 0;
+        int upwardDiagonal = 0;
+
+        for (int x = 0; x <= 2; x++) {
+            if (gameGrid[x][x] == value) {
+                downwardDiagonal++;
+            }
+            if (gameGrid[2-x][x] == value) {
+                upwardDiagonal++;
+            }
+            for (int y = 0; y <= 2; y++) {
+                if (gameGrid[x][y] == value) {
+                    rowPoints++;
+                }
+                if (gameGrid[y][x] == value) {
+                    columnPoints++;
+                }
+                if (rowPoints == 3 || columnPoints == 3 || downwardDiagonal == 3 || upwardDiagonal == 3) {
+                    return true;
+                }
+            }
+            columnPoints = 0;
+            rowPoints = 0;
         }
         return false;
     }
