@@ -11,7 +11,7 @@ public class Game {
         grid = new Grid();
     }
 
-    public void startGame() {
+    public void start() {
         do {
             grid.display();
             playerWon = playerTurn();
