@@ -57,11 +57,11 @@ public class Game {
 
     public void initializeGrid() {
         this.gameGrid = new int[3][3];
-        int inputNumber = 1;
+        int gridInitializer = 1;
         for (int j = 0; j < 3; ++j) {
             for (int i = 0; i < 3; ++i) {
-                gameGrid[j][i] = inputNumber;
-                ++inputNumber;
+                gameGrid[j][i] = gridInitializer;
+                ++gridInitializer;
             }
         }
     }
@@ -121,9 +121,13 @@ public class Game {
     private void gameEnded() {
         if (playerWon) {
             Terminal.message("\nVous avez gagné.\n");
-        } else if (computerWon) {
+            return;
+        }
+        if (computerWon) {
             Terminal.message("\nL'IA a remporté la partie.\n");
-        } else if (isGridFilled) {
+            return;
+        }
+        if (isGridFilled) {
             Terminal.message("\nÉgalité.\n");
         }
     }
