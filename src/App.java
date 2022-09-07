@@ -6,20 +6,17 @@ public class App {
         boolean playerWon = false;
         boolean computerWon = false;
         boolean isGridFilled;
-        int[][] gameGrid = new int[3][3];
-        Game game = new Game(gameGrid);
+        Game game = new Game();
 
-        game.initializeGrid(gameGrid);
-        game.displayGrid(gameGrid);
         do {
-            game.playerTurn(gameGrid);
-            playerWon = game.isWinner(gameGrid, 0);
+            game.playerTurn();
+            playerWon = game.isWinner(0);
             if (!playerWon) {
-                game.computerTurn(gameGrid);
-                computerWon = game.isWinner(gameGrid, -1);
+                game.computerTurn();
+                computerWon = game.isWinner(-1);
             }
-            game.displayGrid(gameGrid);
-            isGridFilled = game.isFull(gameGrid);
+            game.displayGrid();
+            isGridFilled = game.isFull();
         }  while (!playerWon && !isGridFilled && !computerWon);
 
         if (playerWon) {

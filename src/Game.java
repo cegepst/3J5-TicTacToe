@@ -1,18 +1,17 @@
 import java.util.Random;
 
 public class Game {
-    public Game(int[][] gameGrid) {
-        initializeGrid(gameGrid);
-        displayGrid(gameGrid);
+    private int[][] gameGrid;
+    public Game() {
+        initializeGrid();
+        displayGrid();
     }
 
-    public static void displayGrid(int[][] gameGrid) {
-
+    public void displayGrid() {
         Terminal.lineBreak();
 
         for (int j = 0; j < 3; ++j) {
             for (int i = 0; i < 3; ++i) {
-
                 if (gameGrid[j][i] == 0 && i == 2) {
                     System.out.print(" X\n");
                 } else if (gameGrid[j][i] == 0) {
@@ -30,10 +29,9 @@ public class Game {
         }
     }
 
-    public static void initializeGrid(int[][] gameGrid) {
-
+    public void initializeGrid() {
+        this.gameGrid = new int[3][3];
         int inputNumber = 1;
-
 
         for (int j = 0; j < 3; ++j) {
             for (int i = 0; i < 3; ++i) {
@@ -44,7 +42,7 @@ public class Game {
         }
     }
 
-    public static void playerTurn(int[][] gameGrid) {
+    public void playerTurn() {
         switch (askCoordinate()) {
             case 1 : gameGrid[0][0] = 0;break;
             case 2 : gameGrid[0][1] = 0;break;
@@ -58,7 +56,7 @@ public class Game {
         }
     }
 
-    private static int askCoordinate() {
+    private int askCoordinate() {
         int cellCoordinate;
         do {
             cellCoordinate = Terminal.readInt("Sélectionnez une case (1-9): ");
@@ -66,14 +64,14 @@ public class Game {
         return cellCoordinate;
     }
 
-    private static boolean isCoordinateValid(int cellCoordinate) {
+    private boolean isCoordinateValid(int cellCoordinate) {
         if (cellCoordinate < 1 || cellCoordinate > 9) {
             System.out.println("Valeur doit etre entre 1 et 9");
             return false;
         }
         return true;
     }
-    public static void computerTurn(int[][] gameGrid) {
+    public void computerTurn() {
 
         Random randomGenerator = new Random();
         boolean valid;
@@ -95,7 +93,7 @@ public class Game {
 
     }
 
-    public static boolean isFull(int[][] gameGrid)  {
+    public boolean isFull()  {
         int fullCellCount = 0;
         for (int j = 0; j < 3; ++j) {
             for (int i = 0; i < 3; ++i) {
@@ -107,7 +105,7 @@ public class Game {
         return fullCellCount <= 0;
     }
 
-    public static boolean isWinner(int[][] gameGrid, int value) {
+    public boolean isWinner(int value) {
         int rowPoints = 0;
         int columnPoints = 0;
         int downwardDiagonal = 0;
