@@ -14,11 +14,9 @@ public class Game {
     public void startGame() {
         do {
             grid.display();
-            playerTurn();
-            playerWon = isTitleholder(Grid.PLAYER);
+            playerWon = playerTurn();
             if (!playerWon) {
-                computerTurn();
-                computerWon = isTitleholder(Grid.AI);
+                computerWon = computerTurn();
             }
             isGridFilled = grid.isFull();
         }  while (!playerWon && !isGridFilled && !computerWon);
@@ -29,9 +27,10 @@ public class Game {
         return grid.isTitleholder(playerValue);
     }
 
-    public void playerTurn() {
+    public boolean playerTurn() {
         int coord = askCoordinate();
         grid.placeIndicator((coord - 1) / 3, (coord - 1) % 3, Grid.PLAYER);
+        return isTitleholder(Grid.PLAYER);
     }
 
     private int askCoordinate() {
@@ -50,7 +49,7 @@ public class Game {
         return true;
     }
 
-    public void computerTurn() {
+    public boolean computerTurn() {
 
         Random randomGenerator = new Random();
         boolean valid;
@@ -67,6 +66,7 @@ public class Game {
                 valid = true;
             }
         } while (!valid);
+        return isTitleholder(Grid.AI);
     }
 
     private void gameEnded() {
