@@ -54,19 +54,20 @@ public class App {
     }
 
     private static int askCoordinate() {
-        boolean valid;
         int cellCoordinate;
         do {
-            valid = true;
             cellCoordinate = Terminal.readInt("Sélectionnez une case (1-9): ");
-            if (cellCoordinate < 1 || cellCoordinate > 9) {
-                valid = false;
-                System.out.println("Valeur doit etre entre 1 et 9");
-            }
-        } while (!valid);
+        } while (!isCoordinateValid(cellCoordinate));
         return cellCoordinate;
     }
 
+    private static boolean isCoordinateValid(int cellCoordinate) {
+        if (cellCoordinate < 1 || cellCoordinate > 9) {
+            System.out.println("Valeur doit etre entre 1 et 9");
+            return false;
+        }
+        return true;
+    }
     public static void computerTurn(int[][] gameGrid) {
 
         Random randomGenerator = new Random();
