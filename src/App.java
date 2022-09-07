@@ -40,21 +40,7 @@ public class App {
     }
 
     public static void playerTurn(int[][] gameGrid) {
-        boolean valid;
-        int cellCoordinate;
-
-        do {
-            cellCoordinate = Terminal.readInt("Sélectionnez une case (1-9): ");
-
-            if (cellCoordinate < 1 || cellCoordinate > 9) {
-                valid = false;
-                System.out.println("Valeur doit etre entre 1 et 9");
-            } else {
-                valid = true;
-            }
-        } while (!valid);
-
-        switch (cellCoordinate) {
+        switch (askCoordinate()) {
             case 1 : gameGrid[0][0] = 0;break;
             case 2 : gameGrid[0][1] = 0;break;
             case 3 : gameGrid[0][2] = 0;break;
@@ -65,6 +51,20 @@ public class App {
             case 8 : gameGrid[2][1] = 0;break;
             case 9 : gameGrid[2][2] = 0;break;
         }
+    }
+
+    private static int askCoordinate() {
+        boolean valid;
+        int cellCoordinate;
+        do {
+            valid = true;
+            cellCoordinate = Terminal.readInt("Sélectionnez une case (1-9): ");
+            if (cellCoordinate < 1 || cellCoordinate > 9) {
+                valid = false;
+                System.out.println("Valeur doit etre entre 1 et 9");
+            }
+        } while (!valid);
+        return cellCoordinate;
     }
 
     public static void computerTurn(int[][] gameGrid) {
