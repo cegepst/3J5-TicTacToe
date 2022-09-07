@@ -10,10 +10,10 @@ public class App {
 
         do {
             game.playerTurn();
-            playerWon = game.isWinner(0);
+            playerWon = game.isTitleholder(0);
             if (!playerWon) {
                 game.computerTurn();
-                computerWon = game.isWinner(-1);
+                computerWon = game.isTitleholder(-1);
             }
             game.displayGrid();
             isGridFilled = game.isFull();

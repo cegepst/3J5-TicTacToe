@@ -23,12 +23,15 @@ public class Game {
                 } else if (i == 2){
                     Terminal.message(" "+ gameGrid[j][i] +"\n");
                 } else {
-                    Terminal.message(" "+ gameGrid[j][i] +"|");
+                    Terminal.message(" "+ gameGrid[j][i] +" |");
                 }
             }
         }
     }
-
+    public boolean isTitleholder(int playerValue) {
+        TitleholderManeuverer maneuverer = new TitleholderManeuverer(gameGrid);
+        return maneuverer.isTitleholder(playerValue);
+    }
     public void initializeGrid() {
         this.gameGrid = new int[3][3];
         int inputNumber = 1;
@@ -66,7 +69,7 @@ public class Game {
 
     private boolean isCoordinateValid(int cellCoordinate) {
         if (cellCoordinate < 1 || cellCoordinate > 9) {
-            Terminal.message("Valeur doit etre entre 1 et 9");
+            Terminal.message("Valeur doit etre entre 1 et 9 \n");
             return false;
         }
         return true;
@@ -105,34 +108,6 @@ public class Game {
         return fullCellCount <= 0;
     }
 
-    public boolean isWinner(int value) {
-        int rowPoints = 0;
-        int columnPoints = 0;
-        int downwardDiagonal = 0;
-        int upwardDiagonal = 0;
 
-        for (int x = 0; x <= 2; x++) {
-            if (gameGrid[x][x] == value) {
-                downwardDiagonal++;
-            }
-            if (gameGrid[2-x][x] == value) {
-                upwardDiagonal++;
-            }
-            for (int y = 0; y <= 2; y++) {
-                if (gameGrid[x][y] == value) {
-                    rowPoints++;
-                }
-                if (gameGrid[y][x] == value) {
-                    columnPoints++;
-                }
-                if (rowPoints == 3 || columnPoints == 3 || downwardDiagonal == 3 || upwardDiagonal == 3) {
-                    return true;
-                }
-            }
-            columnPoints = 0;
-            rowPoints = 0;
-        }
-        return false;
-    }
 
 }
