@@ -1,10 +1,29 @@
 import java.util.Random;
 
 public class Game {
+
     private int[][] gameGrid;
+    private boolean playerWon = false;
+    private boolean computerWon = false;
+    private boolean isGridFilled;
+
     public Game() {
         initializeGrid();
         displayGrid();
+    }
+
+    public void startGame() {
+        do {
+            playerTurn();
+            playerWon = isTitleholder(0);
+            if (!playerWon) {
+                computerTurn();
+                computerWon = isTitleholder(-1);
+            }
+            displayGrid();
+            isGridFilled = isFull();
+        }  while (!playerWon && !isGridFilled && !computerWon);
+        gameEnded();
     }
 
     public void displayGrid() {
@@ -28,17 +47,17 @@ public class Game {
             }
         }
     }
+
     public boolean isTitleholder(int playerValue) {
         TitleholderManeuverer maneuverer = new TitleholderManeuverer(gameGrid);
         return maneuverer.isTitleholder(playerValue);
     }
+
     public void initializeGrid() {
         this.gameGrid = new int[3][3];
         int inputNumber = 1;
-
         for (int j = 0; j < 3; ++j) {
             for (int i = 0; i < 3; ++i) {
-
                 gameGrid[j][i] = inputNumber;
                 ++inputNumber;
             }
@@ -65,6 +84,7 @@ public class Game {
         }
         return true;
     }
+
     public void computerTurn() {
 
         Random randomGenerator = new Random();
@@ -99,6 +119,13 @@ public class Game {
         return fullCellCount <= 0;
     }
 
-
-
+    private void gameEnded() {
+        if (playerWon) {
+            Terminal.message("\nVous avez gagné.\n");
+        } else if (computerWon) {
+            Terminal.message("\nL'IA a remporté la partie.\n");
+        } else if (isGridFilled) {
+            Terminal.message("\nÉgalité.\n");
+        }
+    }
 }
