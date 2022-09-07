@@ -46,17 +46,8 @@ public class Game {
     }
 
     public void playerTurn() {
-        switch (askCoordinate()) {
-            case 1 : gameGrid[0][0] = 0;break;
-            case 2 : gameGrid[0][1] = 0;break;
-            case 3 : gameGrid[0][2] = 0;break;
-            case 4 : gameGrid[1][0] = 0;break;
-            case 5 : gameGrid[1][1] = 0;break;
-            case 6 : gameGrid[1][2] = 0;break;
-            case 7 : gameGrid[2][0] = 0;break;
-            case 8 : gameGrid[2][1] = 0;break;
-            case 9 : gameGrid[2][2] = 0;break;
-        }
+        int coord = askCoordinate();
+        gameGrid[(coord - 1) / 3][(coord - 1) % 3] = 0;
     }
 
     private int askCoordinate() {
