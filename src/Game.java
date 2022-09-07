@@ -33,20 +33,18 @@ public class Game {
 
         for (int j = 0; j < 3; ++j) {
             for (int i = 0; i < 3; ++i) {
-                if (gameGrid[j][i] == PLAYER && i == 2) {
-                    Terminal.message(" X\n");
-                } else if (gameGrid[j][i] == PLAYER) {
-                    Terminal.message(" X |");
-                } else if (gameGrid[j][i] == AI && i == 2) {
-                    Terminal.message(" O\n");
+                if (gameGrid[j][i] == PLAYER) {
+                    Terminal.message(" X ");
                 } else if (gameGrid[j][i] == AI) {
-                    Terminal.message(" O |");
-                } else if (i == 2){
-                    Terminal.message(" "+ gameGrid[j][i] +"\n");
+                    Terminal.message(" O ");
                 } else {
-                    Terminal.message(" "+ gameGrid[j][i] +" |");
+                    Terminal.message(" "+ gameGrid[j][i] +" ");
+                }
+                if (i != 2) {
+                    Terminal.message("|");
                 }
             }
+            Terminal.lineBreak();
         }
     }
 
