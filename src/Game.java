@@ -2,6 +2,8 @@ import java.util.Random;
 
 public class Game {
 
+    private final int PLAYER = 0;
+    private final int AI = -1;
     private int[][] gameGrid;
     private boolean playerWon = false;
     private boolean computerWon = false;
@@ -15,10 +17,10 @@ public class Game {
     public void startGame() {
         do {
             playerTurn();
-            playerWon = isTitleholder(0);
+            playerWon = isTitleholder(PLAYER);
             if (!playerWon) {
                 computerTurn();
-                computerWon = isTitleholder(-1);
+                computerWon = isTitleholder(AI);
             }
             displayGrid();
             isGridFilled = isFull();
@@ -31,13 +33,13 @@ public class Game {
 
         for (int j = 0; j < 3; ++j) {
             for (int i = 0; i < 3; ++i) {
-                if (gameGrid[j][i] == 0 && i == 2) {
+                if (gameGrid[j][i] == PLAYER && i == 2) {
                     Terminal.message(" X\n");
-                } else if (gameGrid[j][i] == 0) {
+                } else if (gameGrid[j][i] == PLAYER) {
                     Terminal.message(" X |");
-                } else if (gameGrid[j][i] == -1 && i == 2) {
+                } else if (gameGrid[j][i] == AI && i == 2) {
                     Terminal.message(" O\n");
-                } else if (gameGrid[j][i] == -1) {
+                } else if (gameGrid[j][i] == AI) {
                     Terminal.message(" O |");
                 } else if (i == 2){
                     Terminal.message(" "+ gameGrid[j][i] +"\n");
@@ -66,7 +68,7 @@ public class Game {
 
     public void playerTurn() {
         int coord = askCoordinate();
-        gameGrid[(coord - 1) / 3][(coord - 1) % 3] = 0;
+        gameGrid[(coord - 1) / 3][(coord - 1) % 3] = PLAYER;
     }
 
     private int askCoordinate() {
@@ -91,27 +93,24 @@ public class Game {
         boolean valid;
         int xPosition;
         int yPosition;
-
-
         do {
             xPosition = randomGenerator.nextInt(3);
             yPosition = randomGenerator.nextInt(3);
 
-            if (gameGrid[xPosition][yPosition] == 0 || gameGrid[xPosition][yPosition] == -1){
+            if (gameGrid[xPosition][yPosition] == PLAYER || gameGrid[xPosition][yPosition] == AI){
                 valid = false;
             } else {
-                gameGrid[xPosition][yPosition] = -1;
+                gameGrid[xPosition][yPosition] = AI;
                 valid = true;
             }
         } while (!valid);
-
     }
 
     public boolean isFull()  {
         int fullCellCount = 0;
         for (int j = 0; j < 3; ++j) {
             for (int i = 0; i < 3; ++i) {
-                if (gameGrid[j][i] != 0 && gameGrid[j][i] != -1) {
+                if (gameGrid[j][i] != PLAYER && gameGrid[j][i] != AI) {
                     ++fullCellCount;
                 }
             }
